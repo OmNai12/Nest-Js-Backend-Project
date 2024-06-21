@@ -6,6 +6,7 @@ import { Serialize } from 'src/interceptors/serialize.interceptors';
 import { UserDto } from './dtos/user.dto';
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
 
     constructor(private userService: UsersService) { }
@@ -23,7 +24,7 @@ export class UsersController {
     // ! Old Implementation :- @UseInterceptors(ClassSerializerInterceptor)
     // ! Old Implementation (2) :- @UseInterceptors(new SerializerInterceptor(UserDto))
     // Using custom decorator
-    @Serialize(UserDto)
+    // @Serialize(UserDto)
     @Get('/:id')
     async findUser(@Param('id') id: string) {
         const user = await this.userService.findOne(parseInt(id));

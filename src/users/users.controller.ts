@@ -15,10 +15,21 @@ export class UsersController {
     /**
      * 
      * @param body 
+     * @returns 
      */
     @Post('/signup')
     async createUser(@Body() body: CreateUserDto) {
         return await this.authService.signUp(body.email, body.password);
+    }
+
+    /**
+     * 
+     * @param body 
+     * @returns 
+     */
+    @Post('/signin')
+    async signIn(@Body() body: CreateUserDto) {
+        return await this.authService.signIn(body.email, body.password);
     }
 
     // Now, here we return password to so we need to remove that so we use iterceptors

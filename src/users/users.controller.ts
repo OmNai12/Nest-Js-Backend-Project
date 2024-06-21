@@ -1,7 +1,8 @@
-import { Body, ClassSerializerInterceptor, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { SerializerInterceptor } from 'src/interceptors/serialize.interceptors';
 
 @Controller('auth')
 export class UsersController {
@@ -18,7 +19,8 @@ export class UsersController {
     }
 
     // Now, here we return password to so we need to remove that so we use iterceptors
-    @UseInterceptors(ClassSerializerInterceptor)
+    // ! Old Implementation :- @UseInterceptors(ClassSerializerInterceptor)
+    @UseInterceptors(SerializerInterceptor)
     @Get('/:id')
     async findUser(@Param('id') id: string) {
         const user = await this.userService.findOne(parseInt(id));

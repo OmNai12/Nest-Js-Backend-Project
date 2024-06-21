@@ -4,12 +4,13 @@ import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptors';
 import { UserDto } from './dtos/user.dto';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
 
-    constructor(private userService: UsersService) { }
+    constructor(private userService: UsersService, private authService: AuthService) { }
 
     /**
      * 
@@ -17,7 +18,7 @@ export class UsersController {
      */
     @Post('/signup')
     async createUser(@Body() body: CreateUserDto) {
-        return await this.userService.create(body.email, body.password);
+        return await this.authService.signUp(body.email, body.password);
     }
 
     // Now, here we return password to so we need to remove that so we use iterceptors

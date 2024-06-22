@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, Session } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -14,12 +14,29 @@ export class UsersController {
 
     /**
      * 
+     * @param session 
+     * @returns 
+     */
+    @Get('/whoami')
+    whoAmI(@Session() session: any) {
+        return this.userService.findOne(session.userId);
+    }
+
+    @Post('/signout')
+    signOut(@Session() session: any) {
+        session.userId = null;
+    }
+
+    /**
+     * 
      * @param body 
      * @returns 
      */
     @Post('/signup')
-    async createUser(@Body() body: CreateUserDto) {
-        return await this.authService.signUp(body.email, body.password);
+    async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+        const user = await this.authService.signUp(body.email, body.password);
+        session.userId = user.id;
+        return user
     }
 
     /**
@@ -28,8 +45,10 @@ export class UsersController {
      * @returns 
      */
     @Post('/signin')
-    async signIn(@Body() body: CreateUserDto) {
-        return await this.authService.signIn(body.email, body.password);
+    async signIn(@Body() body: CreateUserDto, @Session() session: any) {
+        const user = await this.authService.signIn(body.email, body.password);
+        session.userId = user.id;
+        return user
     }
 
     // Now, here we return password to so we need to remove that so we use iterceptors

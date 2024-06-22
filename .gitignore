@@ -36,3 +36,10 @@ lerna-debug.log*
 
 # Database
 db.sqlite
+
+# Request
+request.http
+
+# Env Files
+.env.development
+.env.test

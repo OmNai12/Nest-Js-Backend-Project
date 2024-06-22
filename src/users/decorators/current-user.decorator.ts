@@ -7,7 +7,7 @@ export const CurrentUser = createParamDecorator(
     (data: never, context: ExecutionContext) => {
         // Execution Context works with any kind of communication protocol eg :- HTTP, graphQL, gRPC etc
         // Execution Context is wrapper around incoming request
-        const req = context.switchToHttp().getRequest();
-        return req.currentUser;
+        const request = context.switchToHttp().getRequest();
+        return request.currentUser;
     }
 );

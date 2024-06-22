@@ -1,0 +1,14 @@
+###
+GET http://localhost:3000/auth/whoami
+
+###
+POST http://localhost:3000/auth/signout
+
+###
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+    "email":"testingmail123456789@gmail.com",
+    "password":"thisisapp"
+}

@@ -27,6 +27,9 @@ export class ReportDto {
     @Expose()
     mileage: number;
 
+    @Expose()
+    approved: boolean;
+
     // From orignal user entity take the value of ID and assign to the userId and tansform the flow
     @Transform(({ obj }) => obj.user.id)
     @Expose()

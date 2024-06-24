@@ -30,6 +30,9 @@ export class ReportsController {
 
     @Get()
     async getEstimate(@Query() query: GetEstimateDto) {
-        console.log(query);
+        // Hard coded
+        return {
+            "price": 2000
+        };
     }
 }

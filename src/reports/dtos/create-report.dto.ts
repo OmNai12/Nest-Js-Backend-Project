@@ -1,4 +1,4 @@
-import { IsLatLong, IsLongitude, IsNumber, IsString, Max, Min } from "class-validator";
+import { IsLatitude, IsLongitude, IsNumber, IsString, Max, Min } from "class-validator";
 
 export class CreateReportDto {
 
@@ -18,7 +18,7 @@ export class CreateReportDto {
     lng: number;
 
     // Latitude
-    @IsLatLong()
+    @IsLatitude()
     lat: number;
 
     @IsNumber()
@@ -28,6 +28,6 @@ export class CreateReportDto {
 
     @IsNumber()
     @Min(0)
-    @Max(1000000)
+    @Max(100000)
     price: number;
 }

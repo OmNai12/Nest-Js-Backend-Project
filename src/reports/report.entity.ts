@@ -7,4 +7,24 @@ export class Report{
 
   @Column()
   price:number;
+
+  @Column()
+  make: string;
+
+  @Column()
+  model:string;
+
+  @Column()
+  year:number;
+
+  // Longitude
+  @Column()
+  lng: number;
+
+  // Latitude
+  @Column()
+  lat: number;
+
+  @Column()
+  mileage:number;  
 }

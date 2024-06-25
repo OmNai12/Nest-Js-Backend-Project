@@ -27,17 +27,19 @@ const cookieSession = require('cookie-session');
     //   entities: [User, Report],
     //   synchronize: true
     // }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          type: 'sqlite',
-          database: config.get<string>('DB_NAME'),
-          synchronize: true,
-          entities: [User, Report]
-        }
-      }
-    }),
+    // ! Old implementation :-
+    // TypeOrmModule.forRootAsync({
+    //   inject: [ConfigService],
+    //   useFactory: (config: ConfigService) => {
+    //     return {
+    //       type: 'sqlite',
+    //       database: config.get<string>('DB_NAME'),
+    //       synchronize: true,
+    //       entities: [User, Report]
+    //     }
+    //   }
+    // }),
+    TypeOrmModule.forRoot(),
     UsersModule, ReportsModule],
   controllers: [AppController],
   providers: [AppService,
